@@ -1,6 +1,6 @@
 import { env, pipeline } from "https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.8.1";
 
-const MODEL_ID = "onnx-community/gemma-4-E2B-it-ONNX";
+const MODEL_ID = "onnx-community/LFM2-1.2B-ONNX";
 const PROMPT =
 `Senior bragging/lecturing tone. 0=normal, 30=max patronizing.
 "おはよう"→0 "頑張れ"→4 "入りたて"→6 "いつまでも"→11 "経験上"→15 "俺に言わせれば"→18 "昔は"→20 "俺ぐらいだと"→24 "若者は"→27 "俺の時代は"→30
@@ -309,8 +309,7 @@ async function ensureGenerator() {
 
     try {
         generator = await pipeline("text-generation", MODEL_ID, {
-            revision: MODEL_REVISION,
-            dtype: "q4f16",
+            dtype: "q4",
             device: selectedDevice,
             progress_callback: handleModelProgress
         });
