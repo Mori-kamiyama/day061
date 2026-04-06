@@ -1,6 +1,6 @@
 import { env, pipeline } from "https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.8.1";
 
-const MODEL_ID = "onnx-community/gemma-3-270m-it-ONNX";
+const MODEL_ID = "onnx-community/gemma-4-E2B-it-ONNX";
 const MODEL_REVISION = "3f1a75d47dcd9e744c1a73a9936c21edaf9440fc";
 const PROMPT =
 `Senior bragging/lecturing tone. 0=normal, 30=max patronizing.
