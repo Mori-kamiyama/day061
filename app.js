@@ -1,6 +1,6 @@
 import { env, pipeline } from "https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.8.1";
 
-const MODEL_ID = "onnx-community/LFM2-1.2B-ONNX";
+const MODEL_ID = "onnx-community/Phi-4-mini-instruct-ONNX";
 const MODEL_REVISION = "main";
 const PROMPT =
 `Senior bragging/lecturing tone. 0=normal, 30=max patronizing.
