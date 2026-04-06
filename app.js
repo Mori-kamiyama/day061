@@ -1,7 +1,8 @@
 import { env, pipeline } from "https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.8.1";
 
-const MODEL_ID = "onnx-community/Phi-4-mini-instruct-ONNX";
-const MODEL_REVISION = "main";
+env.useBrowserCache = false;
+
+const MODEL_ID = "onnx-community/Qwen3-0.6B-ONNX";
 const PROMPT =
 `Senior bragging/lecturing tone. 0=normal, 30=max patronizing.
 "おはよう"→0 "頑張れ"→4 "入りたて"→6 "いつまでも"→11 "経験上"→15 "俺に言わせれば"→18 "昔は"→20 "俺ぐらいだと"→24 "若者は"→27 "俺の時代は"→30
@@ -296,7 +297,6 @@ async function ensureGenerator() {
     }
 
     env.allowLocalModels = false;
-    env.useBrowserCache = true;
     setStatus("Gemma 3 270M を準備しています。");
     window.clearTimeout(loadingHintTimer);
     loadingHintTimer = window.setTimeout(() => {
@@ -310,7 +310,7 @@ async function ensureGenerator() {
 
     try {
         generator = await pipeline("text-generation", MODEL_ID, {
-            dtype: "q4",
+            dtype: "q4f16",
             device: selectedDevice,
             progress_callback: handleModelProgress
         });
@@ -322,8 +322,7 @@ async function ensureGenerator() {
         console.warn("WebGPU initialization failed. Falling back to WASM.", error);
         setStatus("WebGPU を利用できないため WASM で実行します。");
         generator = await pipeline("text-generation", MODEL_ID, {
-            revision: MODEL_REVISION,
-            dtype: "q4f16",
+            dtype: "q4",
             device: "wasm",
             progress_callback: handleModelProgress
         });
